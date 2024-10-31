@@ -1,52 +1,103 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+
 public class Biblioteca {
 
-    protected int quantidadeJogos;
-    protected String listaDeJogos;
-    protected int capacidadeMaxima;
-    protected boolean favorito;
+    protected int quantidadeDeJogos;
+    protected ArrayList <Jogo> listaDeJogos = new ArrayList<Jogo>();
 
-    public Biblioteca() {
+    public Biblioteca(int quantidadeDeJogos){
+        this.quantidadeDeJogos = quantidadeDeJogos;
+    }
 
-        this.quantidadeJogos = quantidadeJogos;
-        this.listaDeJogos = listaDeJogos;
-        this.capacidadeMaxima = capacidadeMaxima;
-        this.favorito = favorito;
+    public Biblioteca(){
+
+    }
+
+
+    public void setQuantidadeDeJogos(int quantidadeJogos) {
+
+        this.quantidadeDeJogos = quantidadeJogos;
 
     }
 
     public void ordenarJogos() {
 
-        //Código de ordenação dos jogos dependendo do critério (ordem alfabética, tempo de jogo, ordem de aquisição)
+        Collections.sort(listaDeJogos, new Comparator<Jogo>() {
+            public int compare(Jogo j1, Jogo j2) {
+                return j1.getNome().compareTo(j2.getNome());
 
+            }
+        });
     }
 
-    public int pesquisarJogos() {
-
-        //Código de pesquisa de jogos com o retorno de um inteiro que representa o jogo
-
-    }
 
     public void favoritarJogo(String nome) {
 
-        //Código para trocar o atributo do jogo (statusJogo: Booleano)
+        for (int i = 0; i < listaDeJogos.size(); i++) {
+
+            if (listaDeJogos.get(i).getNome().equals(nome)) {
+
+                listaDeJogos.get(i).setFavorito(true);
+
+            }
+
+        }
 
     }
 
-    public int buscarJogoPorNome(String nome) {
+    public void desfavoritarJogo(String nome) {
 
-        //Código para retornar um inteiro que representa o jogo com o nome buscado
+        for (int i = 0; i < listaDeJogos.size(); i++) {
+
+            if (listaDeJogos.get(i).getNome().equals(nome)) {
+
+                listaDeJogos.get(i).setFavorito(false);
+
+            }
+
+        }
 
     }
 
-    public void adicionarJogo() {
+    public boolean buscarJogoPorNome(String nome) {
 
-        //Código para adicionar um jogo novo à biblioteca
+        boolean possui = false;
+
+        for (int i = 0; i < listaDeJogos.size(); i++) {
+
+            if (listaDeJogos.get(i).getNome().equals(nome)) {
+
+                possui = true;
+
+            }
+
+        }
+
+        return possui;
 
     }
 
-    public void removerJogo() {
+    public void adicionarJogo(String nome, String Categoria, boolean statusDoJogo, String dataLancamento, boolean favorito) {
 
-        //Código para remover um jogo da biblioteca
+        Jogo jogotemp = new Jogo(nome, Categoria, statusDoJogo, dataLancamento, favorito);
+        listaDeJogos.add(jogotemp);
+
+    }
+
+    public void removerJogo(String nome) {
+
+        for (int i = 0; i < listaDeJogos.size(); i++) {
+
+            if (listaDeJogos.get(i).getNome().equals(nome)) {
+
+                listaDeJogos.remove(i);
+
+            }
+
+        }
 
     }
 

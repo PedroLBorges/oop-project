@@ -2,29 +2,58 @@ public class Jogo {
 
     private String nome;
     private String categoria;
-    private int vezesJogado;
     private boolean statusDoJogo;
     private String dataLancamento;
+    private boolean favorito;
+    private boolean acessoAssinante;
 
-    public Jogo(String nome, String Categoria, int vezesJogado, boolean statusDoJogo, String dataLancamento) {
+
+    public Jogo(String nome, String Categoria, boolean statusDoJogo, String dataLancamento, boolean favorito) {
 
         this.nome = nome;
         this.categoria = Categoria;
-        this.vezesJogado = vezesJogado;
         this.statusDoJogo = statusDoJogo;
         this.dataLancamento = dataLancamento;
+        this.favorito = favorito;
 
     }
 
-    public int mostrarVezesJogado(int num) {
 
-        //Código que, usando o número que representa o jogo, exibe quantas vezes ele foi jogado
+    public void abertoOuFechado(boolean statusDoJogo) {
+
+        if (statusDoJogo) {
+
+            System.out.println("O jogo esta aberto");
+
+        }else {
+
+            System.out.println("O jogo esta fechado");
+
+        }
 
     }
 
-    public getInformacao() {
+    public void statusFavorito(boolean favorito) {
 
-        //Código que retorna um array com todas as informações do jogo, com um mesmo tipo
+        if (favorito) {
+
+            System.out.println("O jogo eh um favorito");
+
+        }else {
+
+            System.out.println("O jogo nao eh um favorito");
+
+        }
+
+    }
+
+    public void mostraInformacao() {
+
+        System.out.println("Nome: " + nome);
+        System.out.println("Categoria: " + categoria);
+        abertoOuFechado(statusDoJogo);
+        System.out.println("Data: " + dataLancamento);
+        statusFavorito(favorito);
 
     }
 
@@ -49,6 +78,18 @@ public class Jogo {
     public String getCategoria() {
 
         return categoria;
+
+    }
+
+    public boolean getFavorito() {
+
+        return favorito;
+
+    }
+
+    public void setFavorito(boolean favorito) {
+
+        this.favorito = favorito;
 
     }
 

@@ -1,26 +1,25 @@
 public class Colecao extends Biblioteca {
 
-    private String nomeColecao;
+    private final String nomeColecao;
     private String dataCriacao;
-    private String descricaocolecao;
+    private String descricaoColecao;
 
-    public Colecao(String nomeColecao, String dataCriacao, String descricaocolecao) {
-
+    public Colecao(int quantidadeDeJogos,String nomeColecao, String dataCriacao, String descricaoColecao) {
+        super(quantidadeDeJogos);
         this.nomeColecao = nomeColecao;
         this.dataCriacao = dataCriacao;
-        this.descrica = descricao;
+        this.descricaoColecao = descricaoColecao;
+    }
+
+    public void mudarDescricao(String descricaoNova) {
+
+        this.descricaoColecao = descricaoNova;
 
     }
 
-    public void mudarDescricao(String descricaonova) {
+    public void setDataCriacao(String data) {
 
-        //Código para substituir a descrição antiga com a nova inserida pelo usuário
-
-    }
-
-    public void selecionarData(String data) {
-
-        //Código para salvar dataCriacao com o valor de data
+        this.dataCriacao = data;
 
     }
 
