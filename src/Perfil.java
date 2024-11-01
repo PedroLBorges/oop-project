@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,31 +21,41 @@ public class Perfil extends Usuario {
     }
 
     private int solicitarID(String mensagem) {
-        System.out.println(mensagem);
+        System.out.print(mensagem);
         return scanner.nextInt();
     }
 
     public void adicionarAmigo(ArrayList<Usuario> usuarios) {
-        int iD = solicitarID("Digite o ID do usuário que deseja adicionar como amigo:");
+        int idAmigo = solicitarID("Digite o ID do usuário que deseja adicionar como amigo: ");
+
+        // Verifica se o ID já está na lista de amigos para evitar duplicatas
+        if (listaAmigos.contains(idAmigo)) {
+            System.out.println("Este usuário já está na sua lista de amigos.");
+            return;
+        }
+
+        // Procura o usuário pelo ID na lista de usuários
         for (Usuario usuario : usuarios) {
-            if (usuario.getID() == iD) {
+            if (usuario.getID() == idAmigo) {
+                listaAmigos.add(idAmigo);  // Adiciona o ID do amigo à lista de IDs
                 quantidadeAmigos++;
-                listaAmigos.add(iD); // Adiciona o ID diretamente como um inteiro
-                System.out.println("Amigo " + usuario.getNome() + " (ID: " + iD + ") adicionado com sucesso!");
+                System.out.println("Amigo " + usuario.getNome() + " (ID: " + idAmigo + ") adicionado com sucesso!");
                 return;
             }
         }
-        System.out.println("Usuário com ID " + iD + " não encontrado.");
+
+        // Caso o ID não seja encontrado
+        System.out.println("Usuário com ID " + idAmigo + " não encontrado.");
     }
 
     public void removerAmigo() {
-        int iD = solicitarID("Digite o ID do amigo que deseja remover:");
-        if (listaAmigos.contains(iD)) { // Verifica se a lista contém o ID como inteiro
-            listaAmigos.remove(Integer.valueOf(iD)); // Remove o ID como um objeto Integer
+        int idAmigo = solicitarID("Digite o ID do amigo que deseja remover: ");
+        if (listaAmigos.contains(idAmigo)) {
+            listaAmigos.remove(Integer.valueOf(idAmigo));  // Remove o ID do amigo
             quantidadeAmigos--;
-            System.out.println("Amigo com ID " + iD + " removido com sucesso.");
+            System.out.println("Amigo com ID " + idAmigo + " removido com sucesso.");
         } else {
-            System.out.println("Amigo com ID " + iD + " não encontrado na sua lista de amigos.");
+            System.out.println("Amigo com ID " + idAmigo + " não encontrado na sua lista de amigos.");
         }
     }
 
@@ -63,3 +74,7 @@ public class Perfil extends Usuario {
         System.out.println("Lista de amigos: " + listaAmigos);
     }
 }
+
+
+
+

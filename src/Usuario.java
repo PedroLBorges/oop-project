@@ -1,4 +1,3 @@
-
 public class Usuario {
 
 
@@ -6,7 +5,7 @@ public class Usuario {
     protected int iD;
     private String senha;
     protected String nascimento;
-    private String Nome;
+//    private String Nome;
 
 
     public Usuario(String nome, String senha, String nascimento) {
@@ -15,9 +14,6 @@ public class Usuario {
         this.nascimento = nascimento;
     }
 
-    public Usuario(){
-
-    }
 
     public void trocarSenha(String novaSenha) {
 
@@ -26,23 +22,36 @@ public class Usuario {
     }
 
     public void setNome(String nome) {
-        this.Nome = nome;
+        this.nome = nome;
 
     }
 
     public void setSenha(String senha) {
-        System.out.println("Digite a sua senha: ");
         this.senha = senha;
 
     }
 
     public String getNome() {
 
-        return nome;
+        return this.nome;
 
     }
+
+    public String getSenha() {
+        return this.senha;
+    }
+
+    public String getNascimento() {
+        return this.nascimento;
+    }
+
+
+    public void setID(int iD) {
+        this.iD = iD;
+    }
+
     public int getID() {
-        return iD;
+        return this.iD;
     }
 
 }
