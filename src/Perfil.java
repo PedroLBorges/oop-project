@@ -103,8 +103,6 @@ public class Perfil extends Usuario {
         System.out.println("Apelido: " + apelido);
         System.out.println("Amigos: " + quantidadeAmigos);
         System.out.println("Status: " + (status ? "Online" : "Offline"));
-        System.out.println("Jogo atual: " + (jogoAtual.isEmpty() ? "Nenhum" : jogoAtual));
-        System.out.println("Lista de amigos: " + listaAmigos);
     }
 }
 
