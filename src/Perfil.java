@@ -27,7 +27,10 @@ public class Perfil extends Usuario {
     }
 
     public void adicionarAmigo(ArrayList<Usuario> usuarios) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
         int idAmigo = solicitarID("Digite o ID do usuário que deseja adicionar como amigo: ");
 
         // Verifica se o ID já está na lista de amigos para evitar duplicatas

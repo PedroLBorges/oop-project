@@ -2,21 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-
     private static ArrayList<Usuario> usuarios = new ArrayList<>();
-    private static ArrayList<Perfil> perfis = new ArrayList<>();
 
     public static void main(String[] args) {
-
-
         menu();
     }
 
     public static void menu() {
         Scanner scanner = new Scanner(System.in);
         int opcao;
-        boolean loginValido = false;
-        int qtdUsuarios = 0;
 
         do {
             System.out.println("\nBem-Vindo ao sistema, escolha sua opção:");
@@ -41,28 +35,18 @@ public class Main {
                     System.out.print("Digite sua data de nascimento (ex: 01/01/2000): ");
                     String nascimento = scanner.nextLine();
 
-                    //Verifique se o nome já existe antes de criar um novo usuário
-                    if (usuarios.stream().anyMatch(u -> u.getNome().equals(nome))) {
-                        System.out.println("Nome de usuário já existe. Tente outro nome.");
-                    } else {
-
-                        Usuario novoUsuario = new Usuario(nome, senha, nascimento);
-                        usuarios.add(novoUsuario); // Adiciona o novo usuário à lista
-
-                        System.out.println("\nUsuário criado com sucesso!");
-                        qtdUsuarios ++;
-                        System.out.println("Agora vamos criar um perfil para o seu usuário: " + novoUsuario.getNome());
-
-                        Perfil perfilAtual = new Perfil(nome, senha, nascimento, "NULL", true, "nada", scanner);
-                        perfis.add(perfilAtual);
-
-                        System.out.println("Digite o apelido que deseja para seu perfil: ");
-                        String apelido = scanner.nextLine().trim();
-                        perfilAtual.setApelido(apelido);
-                        novoUsuario.setID(qtdUsuarios);
-                        System.out.println("Seu ID é: " + novoUsuario.getID());
-                        break;
+                    // Verifique se o nome já existe antes de criar um novo usuário
+                   // if (usuarios.stream().anyMatch(u -> u.getNome().equals(nome))) {
+                      //  System.out.println("Nome de usuário já existe. Tente outro nome.");
+                       // break;
                     }
+
+                    Usuario novoUsuario = new Usuario(nome, senha, nascimento);
+                    usuarios.add(novoUsuario); // Adiciona o novo usuário à lista
+
+                    System.out.println("\nUsuário criado com sucesso!");
+                    System.out.println("Nome do usuário: " + novoUsuario.getNome());
+                    break;
 
                 case 2:
                     System.out.println("Você escolheu realizar o Login!");
@@ -73,20 +57,20 @@ public class Main {
                     System.out.print("Digite sua senha: ");
                     String loginSenha = scanner.nextLine().trim();
 
-                    Perfil perfilLogado = new Perfil(null,null,null,null,true,null,null);
-
-                    for (Perfil perfil : perfis) {
+                    boolean loginValido = false;
+                    Usuario usuarioLogado = null;
+                    for (Usuario usuario : usuarios) {
                         // Verifique a comparação
-                        if (perfil.getNome().equals(loginNome) && perfil.getSenha().equals(loginSenha)) {
-                            System.out.println("Login realizado com sucesso! Bem-vindo, " + perfil.getNome());
+                        if (usuario.getNome().equals(loginNome) && usuario.getSenha().equals(loginSenha)) {
+                            System.out.println("Login realizado com sucesso! Bem-vindo, " + usuario.getNome());
                             loginValido = true;
-                            perfilLogado = perfil;
+                            usuarioLogado = usuario;
+                            break;
                         }
                     }
 
-
                     if (loginValido) {
-                        exibirMenuUsuario(perfilLogado);
+                        exibirMenuUsuario(usuarioLogado);
                     } else {
                         System.out.println("Nome ou senha incorretos. Tente novamente.");
                     }
@@ -100,29 +84,27 @@ public class Main {
                     System.out.println("Opção inválida. Tente novamente.");
                     break;
             }
-
-        } while(opcao !=0);
+        } while (opcao != 0);
 
         scanner.close();
     }
 
-    private static void exibirMenuUsuario(Perfil perfil) {
+    private static void exibirMenuUsuario(Usuario usuario) {
         // Verifica se o usuário logado é um Perfil
-        if (!(perfil instanceof Perfil)) {
+        if (!(usuario instanceof Perfil)) {
             System.out.println("Erro: O usuário não é um perfil válido.");
             return;
         }
 
-        Perfil perfilLogado = (Perfil) perfil; // Faz o cast do usuário para Perfil
+        Perfil perfilLogado = (Perfil) usuario; // Faz o cast do usuário para Perfil
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
         do {
             System.out.println("\nMenu do Usuário: " + perfilLogado.getNome());
-            System.out.println("1 - Exibir Perfil");
-            System.out.println("2 - Adicionar amigo");
-            System.out.println("3 - Ver amigos");
-            System.out.println("4 - Logout");
+            System.out.println("1 - Adicionar amigo");
+            System.out.println("2 - Ver amigos");
+            System.out.println("3 - Logout");
             System.out.print("Escolha uma opção: ");
 
             opcao = scanner.nextInt();
@@ -130,11 +112,6 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-
-                    perfilLogado.exibirPerfil();
-
-                break;
-                case 2:
                     System.out.print("Digite o nome do amigo que deseja adicionar: ");
                     String amigoNome = scanner.nextLine().trim();
 
@@ -150,17 +127,18 @@ public class Main {
                     // Adiciona o amigo, se encontrado
                     if (amigoEncontrado != null) {
                         perfilLogado.adicionarAmigo(usuarios); // Chama o método da instância do Perfil
+                        System.out.println("Amigo " + amigoNome + " adicionado com sucesso!");
                     } else {
                         System.out.println("Usuário com o nome " + amigoNome + " não encontrado.");
                     }
                     break;
 
-                case 3:
+                case 2:
                     System.out.println("Amigos de " + perfilLogado.getNome() + ":");
-                    perfilLogado.exibirListaAmigos(usuarios); // Exibe o perfil e amigos
+                    perfilLogado.exibirPerfil(); // Exibe o perfil e amigos
                     break;
 
-                case 4:
+                case 3:
                     System.out.println("Você saiu do menu do usuário.");
                     break;
 
@@ -168,7 +146,7 @@ public class Main {
                     System.out.println("Opção inválida. Tente novamente.");
                     break;
             }
-        } while (opcao != 4); // Enquanto não escolher sair (logout)
+        } while (opcao != 3); // Enquanto não escolher sair (logout)
     }
 }
 
