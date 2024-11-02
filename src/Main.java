@@ -38,55 +38,55 @@ public class Main {
                     String nascimento = scanner.nextLine();
 
                     // Verifique se o nome já existe antes de criar um novo usuário
-                   // if (usuarios.stream().anyMatch(u -> u.getNome().equals(nome))) {
-                      //  System.out.println("Nome de usuário já existe. Tente outro nome.");
-                       // break;
-                    }
-
-                    Usuario novoUsuario = new Usuario(nome, senha, nascimento);
-                    usuarios.add(novoUsuario); // Adiciona o novo usuário à lista
-
-                    System.out.println("\nUsuário criado com sucesso!");
-                    System.out.println("Nome do usuário: " + novoUsuario.getNome());
-                    break;
-
-                case 2:
-                    System.out.println("Você escolheu realizar o Login!");
-
-                    System.out.print("Digite seu nome: ");
-                    String loginNome = scanner.nextLine().trim();
-
-                    System.out.print("Digite sua senha: ");
-                    String loginSenha = scanner.nextLine().trim();
-
-                    boolean loginValido = false;
-                    Usuario usuarioLogado = null;
-                    for (Usuario usuario : usuarios) {
-                        // Verifique a comparação
-                        if (usuario.getNome().equals(loginNome) && usuario.getSenha().equals(loginSenha)) {
-                            System.out.println("Login realizado com sucesso! Bem-vindo, " + usuario.getNome());
-                            loginValido = true;
-                            usuarioLogado = usuario;
-                            break;
-                        }
-                    }
-
-                    if (loginValido) {
-                        exibirMenuUsuario(usuarioLogado);
-                    } else {
-                        System.out.println("Nome ou senha incorretos. Tente novamente.");
-                    }
-                    break;
-
-                case 0:
-                    System.out.println("Encerrando o programa...");
-                    break;
-
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
-                    break;
+                    // if (usuarios.stream().anyMatch(u -> u.getNome().equals(nome))) {
+                    //  System.out.println("Nome de usuário já existe. Tente outro nome.");
+                    // break;
             }
-        } while (opcao != 0);
+
+            Usuario novoUsuario = new Usuario(nome, senha, nascimento);
+            usuarios.add(novoUsuario); // Adiciona o novo usuário à lista
+
+            System.out.println("\nUsuário criado com sucesso!");
+            System.out.println("Nome do usuário: " + novoUsuario.getNome());
+            break;
+
+            case 2:
+                System.out.println("Você escolheu realizar o Login!");
+
+                System.out.print("Digite seu nome: ");
+                String loginNome = scanner.nextLine().trim();
+
+                System.out.print("Digite sua senha: ");
+                String loginSenha = scanner.nextLine().trim();
+
+                boolean loginValido = false;
+                Usuario usuarioLogado = null;
+                for (Usuario usuario : usuarios) {
+                    // Verifique a comparação
+                    if (usuario.getNome().equals(loginNome) && usuario.getSenha().equals(loginSenha)) {
+                        System.out.println("Login realizado com sucesso! Bem-vindo, " + usuario.getNome());
+                        loginValido = true;
+                        usuarioLogado = usuario;
+                        break;
+                    }
+                }
+
+                if (loginValido) {
+                    exibirMenuUsuario(usuarioLogado);
+                } else {
+                    System.out.println("Nome ou senha incorretos. Tente novamente.");
+                }
+                break;
+
+            case 0:
+                System.out.println("Encerrando o programa...");
+                break;
+
+            default:
+                System.out.println("Opção inválida. Tente novamente.");
+                break;
+        }
+    } while(opcao !=0);
 
         scanner.close();
     }
