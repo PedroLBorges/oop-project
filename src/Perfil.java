@@ -20,12 +20,14 @@ public class Perfil extends Usuario {
         this.scanner = scanner;
     }
 
+
     private int solicitarID(String mensagem) {
         System.out.print(mensagem);
         return scanner.nextInt();
     }
 
     public void adicionarAmigo(ArrayList<Usuario> usuarios) {
+
         int idAmigo = solicitarID("Digite o ID do usuário que deseja adicionar como amigo: ");
 
         // Verifica se o ID já está na lista de amigos para evitar duplicatas
@@ -59,14 +61,42 @@ public class Perfil extends Usuario {
         }
     }
 
-    public void trocarApelido(String novoApelido) {
+    public void setApelido(String novoApelido) {
         this.apelido = novoApelido;
-        System.out.println("Apelido atualizado para: " + novoApelido);
+        System.out.println("Seu novo apelido é: " + novoApelido);
+    }
+
+    public String getApelido() {
+
+        return apelido;
+
+    }
+
+    // Buscar o nome pelo ID
+    private String nomePorID(ArrayList<Usuario> usuarios, int idAmigo) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getID() == idAmigo) {
+                return usuario.getNome();
+            }
+        }
+        return null; //
+    }
+
+    public void exibirListaAmigos(ArrayList<Usuario> usuarios) {
+
+        for(int i = 0; i < listaAmigos.size(); i++) {
+            for (Usuario usuario : usuarios) {
+                if (usuario.getID() == listaAmigos.get(i)) {
+                    System.out.println("Nome: " + usuario.getNome() + " (ID: " + listaAmigos.get(i) + ")");
+                }
+            }
+        }
     }
 
     public void exibirPerfil() {
         System.out.println("Perfil do usuário:");
         System.out.println("Nome: " + nome);
+        System.out.println("ID: " + iD);
         System.out.println("Apelido: " + apelido);
         System.out.println("Amigos: " + quantidadeAmigos);
         System.out.println("Status: " + (status ? "Online" : "Offline"));
