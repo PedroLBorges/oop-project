@@ -43,18 +43,6 @@ public class Colecao extends Biblioteca {
         }
     }
 
-    //setDescricao
-    public void mudarDescricao(String descricaoNova) {
-
-        this.descricaoColecao = descricaoNova;
-
-    }
-
-    public void setDataCriacao(String data) {
-
-        this.dataCriacao = data;
-
-    }
 
     public String getNome(){
         return this.nomeColecao;
