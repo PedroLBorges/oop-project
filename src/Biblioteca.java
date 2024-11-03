@@ -36,9 +36,10 @@ public class Biblioteca {
         }
 
         else {
+            System.out.println("Lista de jogos: ");
+
             for (Jogo jogos : listaDeJogos) {
 
-                System.out.println("Lista de jogos: ");
                 if(jogos.getFavorito()) {
                     System.out.println(jogos.getNome() + "( favorito)");
                 }else{
@@ -108,14 +109,14 @@ public class Biblioteca {
 
         for (int i = 0; i < listaDeJogos.size(); i++) {
 
-            if (listaDeJogos.get(i).getNome().equals(nome)) {
+            if (!listaDeJogos.get(i).getNome().equals(nome)) {
 
-                listaDeJogos.remove(i);
-                System.out.println("Jogo removido com sucesso!");
+                System.out.println("Não foi possivel localizar o jogo");
             }
 
             else {
-                System.out.println("Não foi possivel localizar o jogo");
+                System.out.println("Jogo removido com sucesso!");
+                listaDeJogos.remove(i);
             }
         }
     }

@@ -86,14 +86,14 @@ public class Perfil extends Usuario {
         for(int i = 0; i < listaAmigos.size(); i++) {
             for (Usuario usuario : usuarios) {
                 if (usuario.getID() == listaAmigos.get(i)) {
-                    System.out.println("Nome: " + usuario.getNome() + " (ID: " + listaAmigos.get(i) + ")");
+                    System.out.println("\n\n Nome: " + usuario.getNome() + " (ID: " + listaAmigos.get(i) + ")");
                 }
             }
         }
     }
 
     public void exibirPerfil() {
-        System.out.println("Perfil do usuário:");
+        System.out.println("\n\n\n Perfil do usuário:");
         System.out.println("Nome: " + nome);
         System.out.println("ID: " + iD);
         System.out.println("Apelido: " + apelido);

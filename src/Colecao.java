@@ -38,7 +38,6 @@ public class Colecao extends Biblioteca {
                 }
             }
         }
-
     }
 
     public void mudarDescricao(String descricaoNova) {
