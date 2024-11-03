@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="oop-project">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/oop_project_jar/oop-project.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
