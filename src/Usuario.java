@@ -7,6 +7,7 @@ public class Usuario {
     protected String nascimento;
 
 
+    //Método construtor
     public Usuario(String nome, int iD, String senha, String nascimento) {
         this.nome = nome;
         this.iD = iD;
@@ -15,6 +16,7 @@ public class Usuario {
     }
 
 
+    //setSenha
     public void trocarSenha(String novaSenha) {
 
         this.senha = novaSenha;

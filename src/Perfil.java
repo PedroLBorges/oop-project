@@ -10,6 +10,7 @@ public class Perfil extends Usuario {
     private ArrayList<Integer> listaAmigos;  // Lista de IDs de amigos como inteiros
     private Scanner scanner;  // Scanner compartilhado para entrada do usuário
 
+    //Método construtor
     public Perfil(String nome, Integer iD, String senha, String nascimento, String apelido, boolean status, String jogoAtual, Scanner scanner) {
         super(nome, iD, senha, nascimento);
         this.apelido = apelido;
@@ -20,11 +21,13 @@ public class Perfil extends Usuario {
     }
 
 
+    //getId
     private int solicitarID(String mensagem) {
         System.out.print(mensagem);
         return scanner.nextInt();
     }
 
+    //Método para adicionar um perfil já cadastrado como amigo no perfil que está logado
     public void adicionarAmigo(ArrayList<Usuario> usuarios) {
 
         int idAmigo = solicitarID("Digite o ID do usuário que deseja adicionar como amigo: ");
@@ -49,6 +52,7 @@ public class Perfil extends Usuario {
         System.out.println("Usuário com ID " + idAmigo + " não encontrado.");
     }
 
+    //Método para remover um amigos já cadastrado do perfil logado
     public void removerAmigo() {
         int idAmigo = solicitarID("Digite o ID do amigo que deseja remover: ");
         if (listaAmigos.contains(idAmigo)) {
@@ -81,6 +85,7 @@ public class Perfil extends Usuario {
         return null; //
     }
 
+    //Método que exibe na tela a lista com o nome de cada amigo do perfil logado
     public void exibirListaAmigos(ArrayList<Usuario> usuarios) {
 
         for(int i = 0; i < listaAmigos.size(); i++) {
@@ -92,6 +97,7 @@ public class Perfil extends Usuario {
         }
     }
 
+    //Método para exibir na tela algumas características e atributos do perfil logado
     public void exibirPerfil() {
         System.out.println("\n\n\n Perfil do usuário:");
         System.out.println("Nome: " + nome);

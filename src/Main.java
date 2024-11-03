@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Main {
 
+    //Listas que utilizaremos para armazenar os usuários, seus respectivos perfis e coleções ao longo do programa
     private static ArrayList<Usuario> usuarios = new ArrayList<>();
     private static ArrayList<Perfil> perfis = new ArrayList<>();
     private static ArrayList<Colecao> Colecoes = new ArrayList<>();
@@ -11,10 +12,12 @@ public class Main {
     public static void main(String[] args) {
 
         //inicio programa
+        //Chamando o Método menu, que vai fazer a função de exibir e lidar com os textos
         menu();
     }
 
     public static void menu() {
+        //criando o scanner para poder receber as respostas do usuário
         Scanner scanner = new Scanner(System.in);
         int opcao;
         boolean loginValido = false;
@@ -32,6 +35,7 @@ public class Main {
 
             switch (opcao) {
 
+                //opção de cadastro do usuário
                 case 1:
 
                     System.out.println("Você escolheu se cadastrar!");
@@ -45,7 +49,7 @@ public class Main {
                     System.out.print("Digite sua data de nascimento (ex: 01/01/2000): ");
                     String nascimento = scanner.nextLine();
 
-                    //Verifique se o nome já existe antes de criar um novo usuário
+                    //Verifica se o nome já existe antes de criar um novo usuário
                     if (usuarios.stream().anyMatch(u -> u.getNome().equals(nome))) {
                         System.out.println("Nome de usuário já existe. Tente outro nome.");
                     } else {
@@ -55,11 +59,14 @@ public class Main {
                         usuarios.add(novoUsuario); // Adiciona o novo usuário à lista
 
                         System.out.println("\nUsuário criado com sucesso!");
+
+                        //criando um perfil para o usuário
                         System.out.println("Agora vamos criar um perfil para o seu usuário: " + novoUsuario.getNome());
 
                         Perfil perfilAtual = new Perfil(nome, qtdUsuarios, senha, nascimento, "NULL", true, "nada", scanner);
                         perfis.add(perfilAtual);
 
+                        //colocando mais parâmetros para o usuário, criando assim seu perfil (subclasse de usuario)
                         System.out.println("Digite o apelido que deseja para seu perfil: ");
                         String apelido = scanner.nextLine().trim();
                         perfilAtual.setApelido(apelido);
@@ -69,6 +76,7 @@ public class Main {
 
                 break;
 
+                //opção de login do usuário (um usuário já existente vai entrar e poder manipular seu perfil com as funcionalidade do menu de usuario
                 case 2:
 
                     System.out.println("Você escolheu realizar o Login!");
@@ -91,6 +99,7 @@ public class Main {
                     }
 
 
+                    //verifica se deu certo e muda o rumo do processo para cada caso
                     if (loginValido) {
                         exibirMenuUsuario(perfilLogado);
                     } else {
@@ -99,12 +108,14 @@ public class Main {
 
                 break;
 
+                //opção para encerrar o programa
                 case 0:
 
                     System.out.println("Encerrando o programa...");
 
                 break;
 
+                //caso a opção escolhida não seja presente no menu
                 default:
 
                     System.out.println("Opção inválida. Tente novamente.");
@@ -118,6 +129,7 @@ public class Main {
 
     }
 
+    //menu para usuario que já efetuou o cadastro e acabou de fazer o login
     private static void exibirMenuUsuario(Perfil perfil) {
 
         // Verifica se o usuário logado é um Perfil
@@ -148,12 +160,15 @@ public class Main {
             scanner.nextLine(); // Limpa o buffer
 
             switch (opcao) {
+
+                //Função para exibir as informações do perfil
                 case 1:
 
                     perfilLogado.exibirPerfil();
 
                 break;
 
+                //Função para adicionar outro usuário que já tenha feito o cadastro
                 case 2:
 
                     System.out.print("Digite o nome do amigo que deseja adicionar: ");
@@ -177,6 +192,7 @@ public class Main {
 
                 break;
 
+                //Função para exibir todos os amigos que o perfil já adicionou anteriormente
                 case 3:
 
                     System.out.println("Amigos de " + perfilLogado.getNome() + ":");
@@ -184,13 +200,15 @@ public class Main {
 
                 break;
 
+                //Função para exibir os jogos que já foram adicionados pelo usuário
                 case 4:
 
                     Biblioteca.mostarBibliotec();
 
                 break;
 
-                case 5: // adiciona jogos a biblioteca
+                //Função para cadastrar jogos na biblioteca
+                case 5:
 
                     System.out.println("Qual o nome do jogo que será adicionado?");
                     String jogoNome = scanner.nextLine();
@@ -216,7 +234,8 @@ public class Main {
 
                 break;
 
-                case 6:  // remove jogos da biblioteca
+                //Função que remove jogos já cadastrados pelo usuário anteriormente
+                case 6:
 
                     System.out.println("Qual o nome do jogo que deseja remover?");
                     String jogoNome2 = scanner.nextLine();
@@ -226,7 +245,8 @@ public class Main {
 
                 break;
 
-                case 7: // cria coleções
+                //Função para criar coleções, que são grupos de jogos (bibliotecas menores e separadas por categorias
+                case 7:
 
                     int counter = 0;
                     System.out.println("qual o nome da Coleção?");
@@ -241,6 +261,7 @@ public class Main {
 
                 break;
 
+                //Função para adicionar jogos em coleções que já foram criadas anteriormente
                 case 8:
 
                     if(Colecoes.isEmpty()){ //verifica se existe alguma coleção criada
@@ -303,12 +324,14 @@ public class Main {
                 break;
 
 
+                //Função para fazer loggout (sair do perfil), com a possibilidade de, sem encerrar o programa, entrar e manipular outro perfil que ja foi ou possa ser cadastrado
                 case 10:
 
                     System.out.println("Você saiu do menu do usuário.");
 
                 break;
 
+                //caso a opção escolhida não seja presente no menu
                 default:
 
                     System.out.println("Opção inválida. Tente novamente.");
