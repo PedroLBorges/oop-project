@@ -22,7 +22,7 @@ public class Colecao extends Biblioteca {
 
     }
 
-    public void mostarColeçao(){ //mostra todos os jogos presentes na colecao
+    public void mostarColecao(){ //mostra todos os jogos presentes na colecao
 
         if(listaDeJogosColecao.isEmpty()){
             System.out.println("Não há jogos na biblioteca!");
@@ -31,8 +31,11 @@ public class Colecao extends Biblioteca {
         else {
             for (Jogo jogos : listaDeJogosColecao) {
 
-                System.out.println("Lista de jogos");
-                System.out.println(jogos.getNome() + "|" + jogos.getFavorito());
+                if(jogos.getFavorito()){
+                    System.out.println(jogos.getNome() + "Favorito");
+                }else {
+                    System.out.println(jogos.getNome());
+                }
             }
         }
 

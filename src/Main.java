@@ -291,7 +291,7 @@ public class Main {
                         for (Colecao colecao : Colecoes) { // verifica se o nome da coleção existe
                             if(colecao.getNome().equals(col)) {
                                 Colecao colecao1 = colecao;
-                                colecao1.mostarColeçao();
+                                colecao1.mostarColecao();
                             }
                             else{
                                 System.out.println("Coleção não encontrada!");
