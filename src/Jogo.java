@@ -6,7 +6,7 @@ public class Jogo {
     private boolean favorito;
     private boolean acessoAssinante;
 
-
+    //contrutor de jogo, adiciona um jogo com nome, categoria, datade lançamento e favorito
     public Jogo(String nome, String Categoria, String dataLancamento, boolean favorito) {
 
         this.nome = nome;
@@ -16,7 +16,7 @@ public class Jogo {
 
     }
 
-
+    //metodo que verifica se um jogo esta aberto ou fechado
     public void abertoOuFechado(boolean statusDoJogo) {
 
         if (statusDoJogo) {
@@ -31,6 +31,7 @@ public class Jogo {
 
     }
 
+    //verifica se o jogo descrito pelo usuario é um jogo favorito ou nao
     public void statusFavorito(boolean favorito) {
 
         if (favorito) {
@@ -45,6 +46,7 @@ public class Jogo {
 
     }
 
+    //metodo que mostra as informaçoes de algum jogo do usuario
     public void mostraInformacao() {
 
         System.out.println("Nome: " + nome);

@@ -8,6 +8,7 @@ public class Colecao extends Biblioteca {
     private String dataCriacao;
     private String descricaoColecao;
 
+    //contrutor de coleção que adiciona quantidade de jogos, nome da coleçao, data e descrição
     public Colecao(int quantidadeDeJogos,String nomeColecao, String dataCriacao, String descricaoColecao) {
         super(quantidadeDeJogos);
         this.nomeColecao = nomeColecao;
@@ -15,6 +16,7 @@ public class Colecao extends Biblioteca {
         this.descricaoColecao = descricaoColecao;
     }
 
+    //adiciona um jogo na coleção
     public static void adicionarJogo(String nome, String Categoria, String dataLancamento, boolean favorito) {
 
         Jogo jogotemp = new Jogo(nome, Categoria,  dataLancamento, favorito);
@@ -22,6 +24,7 @@ public class Colecao extends Biblioteca {
 
     }
 
+    //mostra a coleçao criada pelo usuario, contendo seu jogos e se é favorito ou nao
     public void mostarColecao(){ //mostra todos os jogos presentes na colecao
 
         if(listaDeJogosColecao.isEmpty()){

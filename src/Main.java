@@ -301,6 +301,7 @@ public class Main {
 
                 break;
 
+                //Função para exibir coleções que o usuário já criou (ver seus jogos)
                 case 9:
 
                     if(Colecoes.isEmpty()){
