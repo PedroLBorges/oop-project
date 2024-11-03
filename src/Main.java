@@ -5,17 +5,22 @@ public class Main {
 
     private static ArrayList<Usuario> usuarios = new ArrayList<>();
     private static ArrayList<Perfil> perfis = new ArrayList<>();
+    private static ArrayList<Colecao> Colecoes = new ArrayList<>();
+
 
     public static void main(String[] args) {
+
+        //inicio programa
         menu();
     }
 
     public static void menu() {
         Scanner scanner = new Scanner(System.in);
         int opcao;
-        int qtdPerfis = 0;
+        boolean loginValido = false;
+        int qtdUsuarios = 0;
 
-        do {
+        do { // menu incial de login
             System.out.println("\nBem-Vindo ao sistema, escolha sua opção:");
             System.out.println("1 - Cadastro");
             System.out.println("2 - Login");
@@ -38,22 +43,27 @@ public class Main {
                     System.out.print("Digite sua data de nascimento (ex: 01/01/2000): ");
                     String nascimento = scanner.nextLine();
 
-                    System.out.println("Vamos criar um perfil para você agora: ");
-                    System.out.println("Apelido para seu perfil: ");
-                    String apelido = scanner.nextLine();
-
                     //Verifique se o nome já existe antes de criar um novo usuário
-                    if (perfis.stream().anyMatch(p -> p.getNome().equals(nome))) {
-                        System.out.println("Apelido já existe. Tente outro.");
-                    }else {
-                        Perfil novoPerfil = new Perfil(nome, senha, nascimento, apelido, true, "nada", scanner);
-                        perfis.add(novoPerfil);
-                        qtdPerfis++;
-                        System.out.println("\nPerfil criado com sucesso!");
-                        System.out.println("Apelido: " + apelido + "(ID = " + qtdPerfis + ")");
-                    }
+                    if (usuarios.stream().anyMatch(u -> u.getNome().equals(nome))) {
+                        System.out.println("Nome de usuário já existe. Tente outro nome.");
+                    } else {
 
-                break;
+                        qtdUsuarios += 1;
+                        Usuario novoUsuario = new Usuario(nome, qtdUsuarios, senha, nascimento);
+                        usuarios.add(novoUsuario); // Adiciona o novo usuário à lista
+
+                        System.out.println("\nUsuário criado com sucesso!");
+                        System.out.println("Agora vamos criar um perfil para o seu usuário: " + novoUsuario.getNome());
+
+                        Perfil perfilAtual = new Perfil(nome, qtdUsuarios, senha, nascimento, "NULL", true, "nada", scanner);
+                        perfis.add(perfilAtual);
+
+                        System.out.println("Digite o apelido que deseja para seu perfil: ");
+                        String apelido = scanner.nextLine().trim();
+                        perfilAtual.setApelido(apelido);
+                        System.out.println("Seu ID é: " + novoUsuario.getID());
+                        break;
+                    }
 
                 case 2:
                     System.out.println("Você escolheu realizar o Login!");
@@ -64,24 +74,24 @@ public class Main {
                     System.out.print("Digite sua senha: ");
                     String loginSenha = scanner.nextLine().trim();
 
-                    boolean loginValido = false;
-                    Perfil perfilLogado = null;
+                    Perfil perfilLogado = new Perfil(null,0, null,null,null,true,null,null);
+
                     for (Perfil perfil : perfis) {
-                        // Verifique a comparação
+                        // Verifique a comparação para ver se o login é possivel ser realizado
                         if (perfil.getNome().equals(loginNome) && perfil.getSenha().equals(loginSenha)) {
                             System.out.println("Login realizado com sucesso! Bem-vindo, " + perfil.getNome());
                             loginValido = true;
                             perfilLogado = perfil;
-                            break;
                         }
                     }
+
 
                     if (loginValido) {
                         exibirMenuUsuario(perfilLogado);
                     } else {
                         System.out.println("Nome ou senha incorretos. Tente novamente.");
                     }
-                break;
+                    break;
 
                 case 0:
                     System.out.println("Encerrando o programa...");
@@ -91,7 +101,8 @@ public class Main {
                     System.out.println("Opção inválida. Tente novamente.");
                     break;
             }
-        } while (opcao != 0);
+
+        } while(opcao !=0);
 
         scanner.close();
     }
@@ -107,12 +118,18 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
-        do {
+        do { //mostra opçoes do menu de usuario
             System.out.println("\nMenu do Usuário: " + perfilLogado.getNome());
-            System.out.println("1 - Exibir perfil");
+            System.out.println("1 - Exibir Perfil");
             System.out.println("2 - Adicionar amigo");
             System.out.println("3 - Ver amigos");
-            System.out.println("4 - Logout");
+            System.out.println("4 - Ver biblioteca");
+            System.out.println("5 - adicionar jogos");
+            System.out.println("6 - remover jogos");
+            System.out.println("7 - Criar Coleção / max 10");
+            System.out.println("8 - Adicionar jogos na coleção");
+            System.out.println("9 - Ver jogos de coleção");
+            System.out.println("10 - Logout");
             System.out.print("Escolha uma opção: ");
 
             opcao = scanner.nextInt();
@@ -123,17 +140,16 @@ public class Main {
 
                     perfilLogado.exibirPerfil();
 
-                break;
-
+                    break;
                 case 2:
                     System.out.print("Digite o nome do amigo que deseja adicionar: ");
                     String amigoNome = scanner.nextLine().trim();
 
                     // Procura o amigo na lista de usuários
                     Usuario amigoEncontrado = null;
-                    for (Perfil p : perfis) {
-                        if (p.getNome().equals(amigoNome)) {
-                            amigoEncontrado = p;
+                    for (Usuario u : usuarios) {
+                        if (u.getNome().equals(amigoNome)) {
+                            amigoEncontrado = u;
                             break;
                         }
                     }
@@ -141,61 +157,144 @@ public class Main {
                     // Adiciona o amigo, se encontrado
                     if (amigoEncontrado != null) {
                         perfilLogado.adicionarAmigo(usuarios); // Chama o método da instância do Perfil
-                        System.out.println("Amigo " + amigoNome + " adicionado com sucesso!");
                     } else {
                         System.out.println("Usuário com o nome " + amigoNome + " não encontrado.");
                     }
-                break;
+                    break;
 
                 case 3:
                     System.out.println("Amigos de " + perfilLogado.getNome() + ":");
-                    perfilLogado.exibirPerfil(); // Exibe o perfil e amigos
-                break;
+                    perfilLogado.exibirListaAmigos(usuarios); // Exibe o perfil e amigos
+                    break;
 
                 case 4:
+                    Biblioteca.mostarBibliotec();
+                    break;
+
+                case 5: // adiciona jogos a biblioteca
+
+                    System.out.println("Qual o nome do jogo que será adicionado?");
+                    String jogoNome = scanner.nextLine();
+
+                    System.out.println("Qual sua Categoria?");
+                    String categoria = scanner.nextLine();
+
+                    System.out.println("Qual sua data de lançamento?");
+                    String dataLancamento = scanner.nextLine();
+
+                    System.out.println("Deseja tornar favorito?");
+                    String tornarFavorito = scanner.nextLine();
+                    boolean favorito = false;
+
+                    if(tornarFavorito == "sim") {
+                        favorito = true;
+                    }
+
+
+
+                    Biblioteca.adicionarJogoBiblioteca(jogoNome, categoria, dataLancamento, favorito);
+                    System.out.println("Jogo " + jogoNome + " adicionado com sucesso!");
+                    break;
+
+                case 6:  // remove jogos da biblioteca
+                    System.out.println("Qual o nome do jogo que deseja remover?");
+                    String jogoNome2 = scanner.nextLine();
+
+
+                    Biblioteca.removerJogo(jogoNome2);
+                    break;
+
+                case 7: // cria coleções
+                    int counter = 0;
+                    System.out.println("qual o nome da Coleção?");
+                    String nomeColecao = scanner.nextLine();
+                    System.out.println("Qual sua data de criação?");
+                    String dataCriacao = scanner.nextLine();
+                    System.out.println("Dê uma breve descrição");
+                    String descricaoBreve = scanner.nextLine();
+
+                    Colecao Temp = new Colecao(0,nomeColecao, dataCriacao, descricaoBreve);
+                    Colecoes.add(Temp);
+                    break;
+
+                case 8:
+
+                    if(Colecoes.isEmpty()){ //verifica se existe alguma coleção criada
+                        System.out.println("Não existem coleções");
+                        break;
+                    }
+
+                    else{
+                        System.out.println("Qual coleção deseja acessar?");
+                        String col = scanner.nextLine();
+
+                        for (Colecao colecao : Colecoes) { // verifica se coleção existe
+                            if(colecao.getNome().equals(col)) {
+                                Colecao colecao2 = colecao;
+                                System.out.println("Qual o nome do jogo que será adicionado?");
+                                String jogoNome1 = scanner.nextLine();
+
+                                System.out.println("Qual sua Categoria?");
+                                String categoria2 = scanner.nextLine();
+
+                                System.out.println("Qual sua data de lançamento?");
+                                String dataLancamento2 = scanner.nextLine();
+
+                                System.out.println("Deseja tornar favorito?");
+                                String tornarFavorito2 = scanner.nextLine();
+                                boolean favorito2 = false;
+
+                                if(tornarFavorito2 == "sim") {
+                                    favorito = true;
+                                }
+
+                                colecao2.adicionarJogo(jogoNome1, categoria2, dataLancamento2, favorito2);
+                                System.out.println("Jogo" + jogoNome1 + " adicionado com sucesso!");
+
+                            }
+                            else{
+                                System.out.println("Coleção não encontrada");
+                            }
+                        }
+                    }
+
+
+
+                    break;
+
+                case 9:
+
+                    if(Colecoes.isEmpty()){
+                        System.out.println("Não existem coleções");
+                        break;
+                    }
+
+                    else {
+                        System.out.println("Qual coleção deseja Ver?");
+                        String col = scanner.nextLine();
+
+                        for (Colecao colecao : Colecoes) { // verifica se o nome da coleção existe
+                            if(colecao.getNome().equals(col)) {
+                                Colecao colecao1 = colecao;
+                                colecao1.mostarColeçao();
+                            }
+                            else{
+                                System.out.println("Coleção não encontrada!");
+                            }
+
+                        }
+                        break;
+                    }
+
+
+                case 10:
                     System.out.println("Você saiu do menu do usuário.");
-                break;
+                    break;
 
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
-                break;
+                    break;
             }
-        } while (opcao != 4); // Enquanto não escolher sair (logout)
+        } while (opcao != 10); // Enquanto não escolher sair (logout)
     }
 }
-
-
-
-
-//
-//        System.out.println("2-Catálogo de Jogos");
-//        System.out.println("2-Adicionar um jogo na sua conta");
-
-
-
-//        Jogo[] jogos = new Jogo[10];
-//
-//        // Criando jogos com nomes, categorias e status
-//        jogos[0] = new Jogo("The Legend of Zelda: Breath of the Wild", "Aventura", true, "2017-03-03", false);
-//        jogos[1] = new Jogo("The Witcher 3: Wild Hunt", "RPG", true, "2015-05-19", true);
-//        jogos[2] = new Jogo("Dark Souls III", "Ação/RPG", true, "2016-03-24", false);
-//        jogos[3] = new Jogo("Super Mario Odyssey", "Plataforma", true, "2017-10-27", true);
-//        jogos[4] = new Jogo("God of War", "Ação/Aventura", true, "2018-04-20", false);
-//        jogos[5] = new Jogo("Minecraft", "Sandbox", true, "2011-11-18", true);
-//        jogos[6] = new Jogo("Overwatch", "FPS", false, "2016-05-24", false);
-//        jogos[7] = new Jogo("Hollow Knight", "Metroidvania", true, "2017-02-24", true);
-//        jogos[8] = new Jogo("Celeste", "Plataforma", true, "2018-01-25", false);
-//        jogos[9] = new Jogo("Stardew Valley", "Simulação", true, "2016-02-26", true);
-
-//        // Exibindo as informações dos jogos
-//        for (Jogo jogo : jogos) {
-//            jogo.mostraInformacao();
-//            System.out.println();
-//
-//        }
-
-        //---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-

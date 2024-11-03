@@ -5,8 +5,8 @@ public class Assinante extends Perfil {
     private String validadeAssinatura; // Mantendo como String
     private boolean acessoJogos;
 
-    public Assinante(String nome, String senha, String nascimento, String apelido, boolean status, String jogoAtual, Scanner scanner, String validadeAssinatura, boolean acessoJogos) {
-        super(nome, senha, nascimento, apelido, status, jogoAtual, scanner);
+    public Assinante(String nome, Integer iD, String senha, String nascimento, String apelido, boolean status, String jogoAtual, Scanner scanner, String validadeAssinatura, boolean acessoJogos) {
+        super(nome, iD, senha, nascimento, apelido, status, jogoAtual, scanner);
         this.validadeAssinatura = validadeAssinatura;
         this.acessoJogos = acessoJogos;
     }

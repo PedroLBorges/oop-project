@@ -8,8 +8,9 @@ public class Usuario {
 //    private String Nome;
 
 
-    public Usuario(String nome, String senha, String nascimento) {
+    public Usuario(String nome, int iD, String senha, String nascimento) {
         this.nome = nome;
+        this.iD = iD;
         this.senha = senha;
         this.nascimento = nascimento;
     }
@@ -55,4 +56,3 @@ public class Usuario {
     }
 
 }
-

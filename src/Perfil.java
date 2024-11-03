@@ -11,8 +11,8 @@ public class Perfil extends Usuario {
     private ArrayList<Integer> listaAmigos;  // Lista de IDs de amigos como inteiros
     private Scanner scanner;  // Scanner compartilhado para entrada do usuário
 
-    public Perfil(String nome, String senha, String nascimento, String apelido, boolean status, String jogoAtual, Scanner scanner) {
-        super(nome, senha, nascimento);
+    public Perfil(String nome, Integer iD, String senha, String nascimento, String apelido, boolean status, String jogoAtual, Scanner scanner) {
+        super(nome, iD, senha, nascimento);
         this.apelido = apelido;
         this.status = status;
         this.jogoAtual = jogoAtual;
@@ -100,9 +100,6 @@ public class Perfil extends Usuario {
         System.out.println("Apelido: " + apelido);
         System.out.println("Amigos: " + quantidadeAmigos);
         System.out.println("Status: " + (status ? "Online" : "Offline"));
+        System.out.println("Jogo atual: " + (jogoAtual.isEmpty() ? "Nenhum" : jogoAtual));
     }
 }
-
-
-
-

@@ -6,7 +6,7 @@ import java.util.Comparator;
 public class Biblioteca {
 
     protected int quantidadeDeJogos;
-    protected ArrayList <Jogo> listaDeJogos = new ArrayList<Jogo>();
+    protected static ArrayList <Jogo> listaDeJogos = new ArrayList<Jogo>();
 
     public Biblioteca(int quantidadeDeJogos){
         this.quantidadeDeJogos = quantidadeDeJogos;
@@ -32,6 +32,28 @@ public class Biblioteca {
             }
         });
     }
+
+
+    public static void mostarBibliotec(){ //mostra todos os jogos presentes na biblioteca
+
+        if(listaDeJogos.isEmpty()){
+            System.out.println("Não há jogos na biblioteca!");
+        }
+
+        else {
+            for (Jogo jogos : listaDeJogos) {
+
+                System.out.println("Lista de jogos: ");
+                if(jogos.getFavorito()) {
+                    System.out.println(jogos.getNome() + "( favorito)");
+                }else{
+                    System.out.println(jogos.getNome());
+                }
+            }
+        }
+
+    }
+
 
 
     public void favoritarJogo(String nome) {
@@ -80,25 +102,27 @@ public class Biblioteca {
 
     }
 
-    public void adicionarJogo(String nome, String Categoria, boolean statusDoJogo, String dataLancamento, boolean favorito) {
+    public static void adicionarJogoBiblioteca(String nome, String Categoria, String dataLancamento, boolean favorito) {
 
-        Jogo jogotemp = new Jogo(nome, Categoria, statusDoJogo, dataLancamento, favorito);
+        Jogo jogotemp = new Jogo(nome, Categoria,  dataLancamento, favorito);
         listaDeJogos.add(jogotemp);
 
     }
 
-    public void removerJogo(String nome) {
+    public static void removerJogo(String nome) {
 
         for (int i = 0; i < listaDeJogos.size(); i++) {
 
             if (listaDeJogos.get(i).getNome().equals(nome)) {
 
                 listaDeJogos.remove(i);
-
+                System.out.println("Jogo removido com sucesso!");
             }
 
+            else {
+                System.out.println("Não foi possivel localizar o jogo");
+            }
         }
-
     }
 
 }

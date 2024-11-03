@@ -2,17 +2,15 @@ public class Jogo {
 
     private String nome;
     private String categoria;
-    private boolean statusDoJogo;
     private String dataLancamento;
     private boolean favorito;
     private boolean acessoAssinante;
 
 
-    public Jogo(String nome, String Categoria, boolean statusDoJogo, String dataLancamento, boolean favorito) {
+    public Jogo(String nome, String Categoria, String dataLancamento, boolean favorito) {
 
         this.nome = nome;
         this.categoria = Categoria;
-        this.statusDoJogo = statusDoJogo;
         this.dataLancamento = dataLancamento;
         this.favorito = favorito;
 
@@ -51,7 +49,6 @@ public class Jogo {
 
         System.out.println("Nome: " + nome);
         System.out.println("Categoria: " + categoria);
-        abertoOuFechado(statusDoJogo);
         System.out.println("Data: " + dataLancamento);
         statusFavorito(favorito);
 
