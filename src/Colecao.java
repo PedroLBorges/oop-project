@@ -24,7 +24,7 @@ public class Colecao extends Biblioteca {
 
     }
 
-    //mostra a coleçao criada pelo usuario, contendo seu jogos e se é favorito ou nao
+    //mostra a coleçao criada pelo usuario, contendo seu jogos e se é favorito ou não
     public void mostarColecao(){ //mostra todos os jogos presentes na colecao
 
         if(listaDeJogosColecao.isEmpty()){
