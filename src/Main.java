@@ -31,7 +31,9 @@ public class Main {
             scanner.nextLine(); // Limpa o buffer
 
             switch (opcao) {
+
                 case 1:
+
                     System.out.println("Você escolheu se cadastrar!");
 
                     System.out.print("Digite seu nome: ");
@@ -62,10 +64,13 @@ public class Main {
                         String apelido = scanner.nextLine().trim();
                         perfilAtual.setApelido(apelido);
                         System.out.println("Seu ID é: " + novoUsuario.getID());
-                        break;
+
                     }
 
+                break;
+
                 case 2:
+
                     System.out.println("Você escolheu realizar o Login!");
 
                     System.out.print("Digite seu nome: ");
@@ -91,23 +96,30 @@ public class Main {
                     } else {
                         System.out.println("Nome ou senha incorretos. Tente novamente.");
                     }
-                    break;
+
+                break;
 
                 case 0:
+
                     System.out.println("Encerrando o programa...");
-                    break;
+
+                break;
 
                 default:
+
                     System.out.println("Opção inválida. Tente novamente.");
-                    break;
+
+                break;
             }
 
         } while(opcao !=0);
 
         scanner.close();
+
     }
 
     private static void exibirMenuUsuario(Perfil perfil) {
+
         // Verifica se o usuário logado é um Perfil
         if (!(perfil instanceof Perfil)) {
             System.out.println("Erro: O usuário não é um perfil válido.");
@@ -140,8 +152,10 @@ public class Main {
 
                     perfilLogado.exibirPerfil();
 
-                    break;
+                break;
+
                 case 2:
+
                     System.out.print("Digite o nome do amigo que deseja adicionar: ");
                     String amigoNome = scanner.nextLine().trim();
 
@@ -160,16 +174,21 @@ public class Main {
                     } else {
                         System.out.println("Usuário com o nome " + amigoNome + " não encontrado.");
                     }
-                    break;
+
+                break;
 
                 case 3:
+
                     System.out.println("Amigos de " + perfilLogado.getNome() + ":");
                     perfilLogado.exibirListaAmigos(usuarios); // Exibe o perfil e amigos
-                    break;
+
+                break;
 
                 case 4:
+
                     Biblioteca.mostarBibliotec();
-                    break;
+
+                break;
 
                 case 5: // adiciona jogos a biblioteca
 
@@ -194,17 +213,21 @@ public class Main {
 
                     Biblioteca.adicionarJogoBiblioteca(jogoNome, categoria, dataLancamento, favorito);
                     System.out.println("Jogo " + jogoNome + " adicionado com sucesso!");
-                    break;
+
+                break;
 
                 case 6:  // remove jogos da biblioteca
+
                     System.out.println("Qual o nome do jogo que deseja remover?");
                     String jogoNome2 = scanner.nextLine();
 
 
                     Biblioteca.removerJogo(jogoNome2);
-                    break;
+
+                break;
 
                 case 7: // cria coleções
+
                     int counter = 0;
                     System.out.println("qual o nome da Coleção?");
                     String nomeColecao = scanner.nextLine();
@@ -215,16 +238,14 @@ public class Main {
 
                     Colecao Temp = new Colecao(0,nomeColecao, dataCriacao, descricaoBreve);
                     Colecoes.add(Temp);
-                    break;
+
+                break;
 
                 case 8:
 
                     if(Colecoes.isEmpty()){ //verifica se existe alguma coleção criada
                         System.out.println("Não existem coleções");
-                        break;
-                    }
-
-                    else{
+                    } else{
                         System.out.println("Qual coleção deseja acessar?");
                         String col = scanner.nextLine();
 
@@ -251,25 +272,19 @@ public class Main {
                                 colecao2.adicionarJogo(jogoNome1, categoria2, dataLancamento2, favorito2);
                                 System.out.println("Jogo" + jogoNome1 + " adicionado com sucesso!");
 
-                            }
-                            else{
+                            } else{
                                 System.out.println("Coleção não encontrada");
                             }
                         }
                     }
 
-
-
-                    break;
+                break;
 
                 case 9:
 
                     if(Colecoes.isEmpty()){
                         System.out.println("Não existem coleções");
-                        break;
-                    }
-
-                    else {
+                    } else {
                         System.out.println("Qual coleção deseja Ver?");
                         String col = scanner.nextLine();
 
@@ -283,17 +298,22 @@ public class Main {
                             }
 
                         }
-                        break;
                     }
+
+                break;
 
 
                 case 10:
+
                     System.out.println("Você saiu do menu do usuário.");
-                    break;
+
+                break;
 
                 default:
+
                     System.out.println("Opção inválida. Tente novamente.");
-                    break;
+
+                break;
             }
         } while (opcao != 10); // Enquanto não escolher sair (logout)
     }
