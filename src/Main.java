@@ -192,7 +192,7 @@ public class Main {
 
                 break;
 
-                //Função para exibir todos os amigos que o perfil já adicionou anteriormente
+                //Função para exibir todos os amigos que o perfil já adicionou anteriormente!
                 case 3:
 
                     System.out.println("Amigos de " + perfilLogado.getNome() + ":");
