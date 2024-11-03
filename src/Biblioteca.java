@@ -12,11 +12,6 @@ public class Biblioteca {
         this.quantidadeDeJogos = quantidadeDeJogos;
     }
 
-    public Biblioteca(){
-
-    }
-
-
     public void setQuantidadeDeJogos(int quantidadeJogos) {
 
         this.quantidadeDeJogos = quantidadeJogos;

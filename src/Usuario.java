@@ -5,7 +5,6 @@ public class Usuario {
     protected int iD;
     private String senha;
     protected String nascimento;
-//    private String Nome;
 
 
     public Usuario(String nome, int iD, String senha, String nascimento) {
